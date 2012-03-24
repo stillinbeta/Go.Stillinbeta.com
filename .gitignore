@@ -2,3 +2,5 @@
 /include
 /lib
 db.sqlite3
+android/bin
+android/gen
