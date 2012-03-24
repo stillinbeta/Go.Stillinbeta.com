@@ -1,17 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
 
+from go.views import handle_home, follow_redirect
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'gosib.views.home', name='home'),
-    # url(r'^gosib/', include('gosib.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', handle_home),
+    url(r'^(?P<word>[a-z]*)$', follow_redirect),
 )
