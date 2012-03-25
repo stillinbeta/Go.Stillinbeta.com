@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.content.pm.PackageManager;
@@ -65,8 +66,12 @@ public class GoSibActivity extends Activity
                 StatusLine status = response.getStatusLine();
                 String code = Integer.toString(status.getStatusCode());
                 String word = EntityUtils.toString(response.getEntity());
-                Toast toast2 = Toast.makeText(context, word, Toast.LENGTH_SHORT);
-                toast2.show();
+
+                setContentView(R.layout.showurl);
+                TextView shorten = (TextView)findViewById(R.id.noun);
+                shorten.setText(word); 
+
+
             }
             catch (IOException  e) {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
