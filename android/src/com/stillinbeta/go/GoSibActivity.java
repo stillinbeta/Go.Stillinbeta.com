@@ -1,29 +1,29 @@
 package com.stillinbeta.go;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.res.Resources;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.AsyncTask;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.view.inputmethod.InputMethodManager;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import android.content.res.Resources;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.StatusLine;
 import org.apache.http.util.EntityUtils;
-import android.util.Log;
 
 public class GoSibActivity extends Activity
 {
