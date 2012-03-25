@@ -4,6 +4,24 @@
         <title>Shorten!</title>
     </head>
     <body>
-        ?!?
+        <script type="application/javascript">
+            function get_shortened() {
+                var url = document.getElementById('url').value
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    console.debug('readystate change');
+                    if (req.readyState == 4) {
+                        document.getElementById('shortened').innerHTML = 
+                        req.response
+                    }
+                };
+                req.open('POST', '/');
+                req.send('url=' + url);
+            }
+         </script>
+        <input type="text" id="url" name="url" />
+        <label for="url" value="URL:" /> 
+        <input type="button" value="Shorten" onclick="get_shortened()"/>
+        <div id="shortened"></div>
     </body>
 </html>
