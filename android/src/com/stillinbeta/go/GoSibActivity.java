@@ -18,14 +18,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 
 
 public class GoSibActivity extends Activity
 {
-    private static final String API_URL = "http://10.0.2.2:8000";
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -51,9 +50,10 @@ public class GoSibActivity extends Activity
     private OnClickListener sendUrl = new OnClickListener() {
         public void onClick(View v) {
             EditText url = (EditText)findViewById(R.id.url);
+            Resources res = getResources();
 
             Context context = getApplicationContext();
-            HttpPost post = new HttpPost(API_URL);
+            HttpPost post = new HttpPost(res.getString(R.string.api_url));
             try {
                 StringEntity ent = new StringEntity("url=" + url.getText());
                 post.setEntity(ent);
