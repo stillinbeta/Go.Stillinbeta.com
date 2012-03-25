@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.StatusLine;
 import org.apache.http.util.EntityUtils;
 
@@ -85,6 +86,9 @@ public class GoSibActivity extends Activity
             } catch (UnsupportedEncodingException e) {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show(); 
             }
+            // Lighttpd doesn't support this for some reason
+            post.getParams().setBooleanParameter(
+                CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
 
             DefaultHttpClient client = new DefaultHttpClient();
             try {
@@ -92,6 +96,9 @@ public class GoSibActivity extends Activity
                 StatusLine status = response.getStatusLine();
                 String code = Integer.toString(status.getStatusCode());
                 String word = EntityUtils.toString(response.getEntity());
+                if (Integer.parseInt(code) != 200) {
+                    Log.e("gosib", word);
+                }
 
                 return word;
 
