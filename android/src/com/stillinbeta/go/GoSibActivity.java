@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
 import org.apache.http.client.methods.HttpPost;
@@ -50,15 +52,31 @@ public class GoSibActivity extends Activity
 
     private OnClickListener sendUrl = new OnClickListener() {
         public void onClick(View v) {
+           new GetShortenedUrl().execute();
+        }
+    };
+
+    private class GetShortenedUrl extends AsyncTask<Void, Void, String> {
+        private Context context;
+        private ProgressDialog dialog;
+
+        protected void onPreExecute() {
+            this.context = getApplicationContext();
+            this.dialog = ProgressDialog.show(GoSibActivity.this, "", "Shortenting...", true);
+        }
+
+        protected String doInBackground(Void... nothing) {
+            
             EditText url = (EditText)findViewById(R.id.url);
             Resources res = getResources();
 
-            Context context = getApplicationContext();
             HttpPost post = new HttpPost(res.getString(R.string.api_url));
             try {
                 StringEntity ent = new StringEntity("url=" + url.getText());
                 post.setEntity(ent);
-            } catch (UnsupportedEncodingException e) {}
+            } catch (UnsupportedEncodingException e) {
+                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show(); 
+            }
 
             DefaultHttpClient client = new DefaultHttpClient();
             try {
@@ -67,15 +85,21 @@ public class GoSibActivity extends Activity
                 String code = Integer.toString(status.getStatusCode());
                 String word = EntityUtils.toString(response.getEntity());
 
-                setContentView(R.layout.showurl);
-                TextView shorten = (TextView)findViewById(R.id.noun);
-                shorten.setText(word); 
+                return word;
 
-
-            }
-            catch (IOException  e) {
+                        } catch (IOException  e) {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
             }
+
+            return "";
         }
-    };
+
+        protected void onPostExecute(String word) {
+            setContentView(R.layout.showurl);
+            TextView shorten = (TextView)findViewById(R.id.noun);
+            shorten.setText(word); 
+
+            this.dialog.dismiss();
+        }
+    }
 }
