@@ -14,7 +14,8 @@
         android:id="@+id/url"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:layout_below="@id/label"/>
+        android:layout_below="@id/label"
+        android:text="http://" />
     <Button 
         android:id="@+id/shorten"
         android:layout_height="wrap_content"

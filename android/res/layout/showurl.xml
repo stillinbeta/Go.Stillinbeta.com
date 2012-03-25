@@ -17,8 +17,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="45sp" 
-        android:layout_below="@id/domain"
-        android:text="error"/>
+        android:layout_below="@id/domain" />
 </RelativeLayout>
 
                       
