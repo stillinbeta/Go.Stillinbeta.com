@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
+import android.view.inputmethod.InputMethodManager;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -59,20 +60,28 @@ public class GoSibActivity extends Activity
     private class GetShortenedUrl extends AsyncTask<Void, Void, String> {
         private Context context;
         private ProgressDialog dialog;
+        private EditText url;
 
         protected void onPreExecute() {
             this.context = getApplicationContext();
-            this.dialog = ProgressDialog.show(GoSibActivity.this, "", "Shortenting...", true);
+            this.url = (EditText)findViewById(R.id.url);
+            this.dialog = ProgressDialog.show(GoSibActivity.this, 
+                "", "Shortenting...", true);
+
+            // Hide the keyboard
+            InputMethodManager imm = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(this.url.getWindowToken(), 0);
+
         }
 
         protected String doInBackground(Void... nothing) {
             
-            EditText url = (EditText)findViewById(R.id.url);
             Resources res = getResources();
 
             HttpPost post = new HttpPost(res.getString(R.string.api_url));
             try {
-                StringEntity ent = new StringEntity("url=" + url.getText());
+                StringEntity ent = new StringEntity("url=" + this.url.getText());
                 post.setEntity(ent);
             } catch (UnsupportedEncodingException e) {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show(); 
@@ -88,7 +97,8 @@ public class GoSibActivity extends Activity
                 return word;
 
                         } catch (IOException  e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, e.toString(), 
+                               Toast.LENGTH_SHORT).show();
             }
 
             return "";
