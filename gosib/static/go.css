@@ -1,0 +1,38 @@
+body {
+    background-image: url('/static/bg.png');
+}
+    
+.hero-unit {
+    text-align: center;
+}
+
+#shortener {
+    font-size: 24pt;
+    width: 70%;
+    height: 28pt;
+}    
+
+#shorten {
+   font-size: 24pt; height: 1.5em;
+   height: 32pt;
+   width: 20%;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.spinner img {
+    display: block;
+    margin: 0 auto;
+}
+
+.noun {
+    text-align: center;
+    display: inline;
+}
+
+.reveal {
+    margin: 0 auto;
+}

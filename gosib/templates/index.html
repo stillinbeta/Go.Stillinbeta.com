@@ -1,27 +1,84 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Shorten!</title>
+        <link rel="stylesheet" href="/static/bootstrap.min.css" />
+        <link rel="stylesheet" href="/static/go.css" />
+        <script src="/static/jquery-1.7.2.min.js" type="application/javascript"></script> 
     </head>
     <body>
         <script type="application/javascript">
-            function get_shortened() {
-                var url = document.getElementById('url').value
-                var req = new XMLHttpRequest();
-                req.onreadystatechange = function () {
-                    console.debug('readystate change');
-                    if (req.readyState == 4) {
-                        document.getElementById('shortened').innerHTML = 
-                        req.response
-                    }
-                };
-                req.open('POST', '/');
-                req.send('url=' + url);
+            function load_shortened() {
+                $('#noun').hide();
+                $('.spinner').show();
+                $('#results').fadeIn();
+                var url = $('#shortener').val();
+                $.post('/', {'url': url}, function(data) {
+                    $('#noun-field').html(data);
+                    $(".spinner").hide();
+                    $(".noun").show();
+                });
             }
+
+            $(document).ready(function () {
+                $('#shorten').click(load_shortened)
+            });
          </script>
-        <input type="text" id="url" name="url" />
-        <label for="url" value="URL:" /> 
-        <input type="button" value="Shorten" onclick="get_shortened()"/>
-        <div id="shortened"></div>
+        <div class="container">
+            <div class="hero-unit">
+                <h1>go.stillinbeta.com*</h1>
+                <h3>a human-readble, single-use URL shortener</h2>
+                *pretend the domain name is better
+            </div>
+            <div class="row">
+                <div class="span8 well">
+                    <span class="search-box">
+                    <form class=" form-horizontal">
+                        <input type="text"
+                                class="input-large search search-query"
+                                id="shortener"
+                                style=""
+                                placeholder="URL" />
+                        <input type="button"
+                               class= "input-large btn btn-primary"
+                               id="shorten"
+                               value="Shorten" />
+                    </form> 
+                </div>
+                <div class="span3 well">
+                    <h2 class="android"><a href="https://github.com/stillinbeta/Go.Stillinbeta.com/downloads">
+                            Download the Android App (beta)
+                    </a></h2>
+                </div>
+            </div>
+             <div class="row reveal" >
+                <div class="span11 well" id="results" style="display:none;">
+                    <div class="spinner"><img src=/static/spinner.gif></div>
+                    <div class="noun" style="display:none">
+                        <h3>http://go.stillinbeta.com</h3>
+                        <h1 id="noun-field"></h1>
+                    </div>
+                </div>
+             </div>
+             <div class="row">
+                <div class="span3">
+                    <h3>1. Shorten</h3>
+                    Use the website or the Android app to shorten an unwieldy URL.</div>
+                <div class="span3">
+                    <h3>2. Read</h3>
+                    go.stillinbeta.com will produce a concise, human-readable URL for you to use.
+                    </div>
+                <div class="span3"><h3>3. Type</h3>
+                    Type the URL into another device to transfer it over. No software required.</div>
+                <div class="span3"><h3>4. Forget</h3>
+                    URLs can only be used once, otherwise we'd run out of words!
+                </div> 
+            </div>
+            <div class="row footer">
+                <div class="span12">
+                    by <a href="http://twitter.com/stillinbeta">@stillinbeta</a> |
+                    fork on <a href="http://github.com/stillinbeta/gosib">github</a>
+            </div>
     </body>
 </html>

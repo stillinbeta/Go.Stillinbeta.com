@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', handle_home),
     url(r'^(?P<word>[a-z]*)$', follow_redirect),
+    ('^static/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': '/home/sib/Devel/gosib/gosib/static'})
 )
