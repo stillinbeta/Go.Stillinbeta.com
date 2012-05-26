@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.views.decorators.http import require_http_methods, require_GET
+from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 
@@ -14,6 +14,13 @@ def handle_home(request):
 
 def render_home(request):
     return render_to_response('index.html')
+
+def handle_shorten(request):
+    if 'url' not in request.POST:
+        redirect('/')
+    noun = Noun.objects.shorten(request.POST['url'])
+    display_noun = '/{}/'.format(noun.noun)
+    return render_to_response('index.html', {'noun': display_noun})
 
 def shorten_url(request):
     if 'url' not in request.POST:

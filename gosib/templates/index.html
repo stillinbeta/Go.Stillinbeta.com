@@ -10,7 +10,7 @@
     <body>
         <script type="application/javascript">
             function load_shortened() {
-                $('#noun').hide();
+                $('.noun').hide();
                 $('.spinner').show();
                 $('#results').fadeIn();
                 var url = $('#shortener').val();
@@ -19,6 +19,7 @@
                     $(".spinner").hide();
                     $(".noun").show();
                 });
+                return false;
             }
 
             $(document).ready(function () {
@@ -47,24 +48,30 @@
             </div>
 <div class="row">
                 <div class="span12">
-                    <form class=" form-inline">
+                    <form class=" form-inline" method="POST" action="/shorten">
                         <input type="text"
                                 class="input-large search search-query"
                                 id="shortener"
+                                name="url"
                                 style=""
                                 placeholder="URL" />
-                        <input type="button"
+                        <input type="submit"
                                class= "input-large btn btn-primary"
                                id="shorten"
                                value="Shorten" />
                     </form> 
                 </div>
                 <div class="row reveal" >
-                <div class="span11 well" id="results" style="display:none;">
-                    <div class="spinner"><img src=/static/spinner.gif></div>
-                    <div class="noun" style="display:none">
+                <div class="span11 well"
+                     id="results"
+                    {%if not noun%}style="display:none;"{% endif %}>
+                    <div class="spinner" style="display:none">
+                        <img src=/static/spinner.gif>
+                    </div>
+                    <div class="noun"
+                        {% if not noun %}style="display:none"{% endif %}>
                         <h3>http://go.stillinbeta.com</h3>
-                        <h1 id="noun-field"></h1>
+                        <h1 id="noun-field">{{noun|default:""}}</h1>
                     </div>
                 </div>
              </div>
