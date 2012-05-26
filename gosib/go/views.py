@@ -15,19 +15,21 @@ def handle_home(request):
 def render_home(request):
     return render_to_response('index.html')
 
-def handle_shorten(request):
-    if 'url' not in request.POST:
-        redirect('/')
-    noun = Noun.objects.shorten(request.POST['url'])
-    display_noun = '/{}/'.format(noun.noun)
-    return render_to_response('index.html', {'noun': display_noun})
-
 def shorten_url(request):
     if 'url' not in request.POST:
         return HttpResponse(status=400)
     noun = Noun.objects.shorten(request.POST['url'])
     return HttpResponse(content=reverse(follow_redirect, args=(noun.noun,)),
                         content_type='text/plain')
+
+@require_POST
+def handle_shorten(request):
+    if 'url' not in request.POST:
+        redirect(reverse(handle_home))
+    noun = Noun.objects.shorten(request.POST['url'])
+    display_noun = '/{}/'.format(noun.noun)
+    return render_to_response('index.html', {'noun': display_noun})
+
 
 @require_GET
 def follow_redirect(request, word):
