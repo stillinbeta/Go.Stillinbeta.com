@@ -31,8 +31,22 @@
                 <h3>a human-readble, single-use URL shortener, made for moving long URLs between devices</h2>
                 *pretend the domain name is better
             </div>
-            <div class="row">
-                <div class="span8 well">
+            <div class="row instructions">
+                <div class="span3">
+                    <h3>1. Shorten</h3>
+                    Use the box below, the "API", or the Android app to shorten an unwieldy URL.</div>
+                <div class="span3">
+                    <h3>2. Read</h3>
+                    go.stillinbeta.com will produce a concise, human-readable URL for you to use.
+                    </div>
+                <div class="span3"><h3>3. Type</h3>
+                    Enter the URL into another device to transfer it over. No software required.</div>
+                <div class="span3"><h3>4. Forget</h3>
+                    URLs can only be used once, otherwise we'd run out of words!
+                </div> 
+            </div>
+<div class="row">
+                <div class="span12">
                     <form class=" form-inline">
                         <input type="text"
                                 class="input-large search search-query"
@@ -45,13 +59,7 @@
                                value="Shorten" />
                     </form> 
                 </div>
-                <div class="span3 well" style="height:48pt;">
-                    <h2 class="android"><a href="https://github.com/stillinbeta/Go.Stillinbeta.com/downloads">
-                            Download the Android App (beta)
-                    </a></h2>
-                </div>
-            </div>
-             <div class="row reveal" >
+                <div class="row reveal" >
                 <div class="span11 well" id="results" style="display:none;">
                     <div class="spinner"><img src=/static/spinner.gif></div>
                     <div class="noun" style="display:none">
@@ -60,21 +68,22 @@
                     </div>
                 </div>
              </div>
-             <div class="row">
-                <div class="span3">
-                    <h3>1. Shorten</h3>
-                    Use the website or the Android app to shorten an unwieldy URL.</div>
-                <div class="span3">
-                    <h3>2. Read</h3>
-                    go.stillinbeta.com will produce a concise, human-readable URL for you to use.
-                    </div>
-                <div class="span3"><h3>3. Type</h3>
-                    Enter the URL into another device to transfer it over. No software required.</div>
-                <div class="span3"><h3>4. Forget</h3>
-                    URLs can only be used once, otherwise we'd run out of words!
-                </div> 
+
+            <div class="row reveal">
+                <div class="span8 well">
+                    <pre class="pretty">
+$ curl -X POST -d url=http://t.co/nXkdO5u9 http://go.stillinbeta.com
+/bread/
+$
+</pre>
+                </div>
+                <div class="span3 well">
+                    <h2 class="android"><a href="https://github.com/stillinbeta/Go.Stillinbeta.com/gosib-debug.apk/qr_code">
+                            Download the Android App (beta)
+                    </a></h2>
+                </div>
             </div>
-            <div class="row footer">
+                        <div class="row footer">
                 <div class="span12">
                     by <a href="http://twitter.com/stillinbeta">@stillinbeta</a> |
                     fork on <a href="http://github.com/stillinbeta/go.stillinbeta.com">github</a>

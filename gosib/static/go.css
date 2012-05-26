@@ -8,14 +8,14 @@ body {
 
 #shortener {
     font-size: 24pt;
-    width: 70%;
+    width: 75%;
     height: 100%;
 }    
 
 #shorten {
    font-size: 24pt; height: 1.5em;
    height: 100%;
-   width: 24%;
+   width: 20%;
 }
 
 .footer {
@@ -35,4 +35,8 @@ body {
 
 .reveal {
     margin: 0 auto;
+}
+
+.instructions {
+    margin-bottom: 2%;
 }
